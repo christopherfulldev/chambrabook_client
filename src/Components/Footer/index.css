@@ -1,0 +1,9 @@
+.footer{
+    background-color:black;
+    color: white;
+    border: 3vh white solid;
+}
+
+a:link{
+    color: red;
+}
