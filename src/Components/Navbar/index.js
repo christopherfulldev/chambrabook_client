@@ -1,7 +1,11 @@
 import "./index.css";
-import {Nav} from 'react-bootstrap'
+import useToken from "../../Hooks/useToken";
+import LoginComponent from "../../Components/Login";
+import {Nav} from "react-bootstrap";
+
 
 const NavbarComponent = () => {
+
     return(
         <nav>
             <h3 className="title"><img/>Chambrabook</h3>
@@ -19,6 +23,7 @@ const NavbarComponent = () => {
             <Nav.Link eventKey="Matches">Matches</Nav.Link>
             </Nav.Item>
             </Nav>
+            <LoginComponent useToken={useToken}/>
         </nav>       
     )   
 }
