@@ -1,14 +1,47 @@
 import "./index.css";
 
-const FooterComponent = () => {
-    return(
-        <footer className="footer">
-            <p>Created At Ironhack Web Development Course</p>
-            <p>Created by <a href="https://github.com/christopherfulldev">
-                <img src="../../../public/GitHub-logo.png" alt="Github icon"/>Christopher Pinto</a>
-            </p>
-        </footer>
-    )
+import * as React from 'react';
+import CssBaseline from '@mui/material/CssBaseline';
+import Box from '@mui/material/Box';
+import Typography from '@mui/material/Typography';
+import Container from '@mui/material/Container';
+import Link from '@mui/material/Link';
+
+function Copyright() {
+  return (
+    <Typography variant="body2" color="text.secondary">
+      {'Copyright © '}
+      <Link color="inherit" href="https://github.com/christopherfulldev/">
+        ChambraBook
+      </Link>{' '}
+      {new Date().getFullYear()}
+      {'.'}
+    </Typography>
+  );
 }
 
+const FooterComponent = () => {
+  return (
+   
+      <Box className="footer"
+        component="footer"
+        sx={{
+          py: 3,
+          px: 2,
+          mt: 'auto',
+          backgroundColor: (theme) =>
+            theme.palette.mode === 'light'
+              ? theme.palette.grey[200]
+              : theme.palette.grey[800],
+        }}
+      >
+        <Container maxWidth="sm">
+          <Typography variant="body1">
+            Create in Ironhack FullStack Web Development Course
+          </Typography>
+          <Copyright />
+        </Container>
+      </Box>
+  );
+}
 export default FooterComponent;

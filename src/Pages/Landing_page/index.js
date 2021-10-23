@@ -1,12 +1,19 @@
 import "./index.css";
 
-import SignInComponent from "../../Components/Signin";
+import useToken from "../../Hooks/useToken";
 
-const LandingPage = () => {
+import FooterComponent from "../../Components/Footer";
+import AlbumComponent from "../../Components/Album"
+import SignUpComponent from "../../Components/Signup";
+import LoginComponent from "../../Components/Login";
+import NavbarComponent from "../../Components/Navbar";
+import ProfilePage from "../../Pages/Profile_page";
+
+const LandingPage = (props) => {
     return(
-        <div>
-            <SignInComponent/>
-            <img src="../../../public/istockphoto-511990984-612x612.jpg" alt="photo mosaic"/>
+        <div >
+            <LoginComponent useToken={useToken}/>
+            {/* <SignUpComponent/> */}
         </div>
     );
 };

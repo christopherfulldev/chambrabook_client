@@ -13,6 +13,9 @@ class APIconnection {
     return this.api.post("/login", {username:userName, password});
   };
 
+  getProfilePayload = ({username, token}) => {
+    return this.api.get(`/user/finder/${username}`, {headers:{Authorization: token}})
+  }
 }
 
 export default new APIconnection();

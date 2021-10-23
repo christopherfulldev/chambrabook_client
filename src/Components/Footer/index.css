@@ -1,9 +1,6 @@
 .footer{
-    background-color:black;
-    color: white;
-    border: 3vh white solid;
-}
-
-a:link{
-    color: red;
+    background-image: "../../../public/GitHub-logo.png";
+    display: flex;
+    align-items: flex-end;
+    align-content: flex-end;
 }

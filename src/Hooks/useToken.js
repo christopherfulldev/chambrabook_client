@@ -4,13 +4,15 @@ const useToken = () => {
     const getToken = () => {
         const tokenString = localStorage.getItem("token");
         const userToken = JSON.parse(tokenString);
-        return userToken?.token //encadeamento opcional para curto no primeiro acesso sem token
+        console.log(userToken);
+        return userToken; 
       };
 
     const [token, setToken] = useState(getToken());
 
     const savedToken = (userToken) => {
-        localStorage.setItem("token", JSON.stringify(userToken));
+        localStorage.setItem("token", JSON.stringify("Bearer " + userToken.token ));
+        localStorage.setItem("payload", JSON.stringify(userToken.payload));
         setToken(userToken);
       };
     return {
