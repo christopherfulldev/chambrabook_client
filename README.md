@@ -28,7 +28,7 @@ Para utilizar nossa API basta acessar "https://chambrabook.herokuapp.com/" e rea
 Nenhuma instalação é necessaria.
 
 ## ☕ Usando <ChambraBook>
-
+Nossa interface grafica é intuitiva, o que torna facil sua utilização. Acesse o link, realize o cadastro/register e desfrute de bons momentos junto aos amigos.
 
 ## 📫 Contribuindo com <ChambraBook>
 
