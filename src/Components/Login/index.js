@@ -24,7 +24,7 @@ function Copyright(props) {
   return (
     <Typography variant="body2" color="text.secondary" align="center" {...props}>
       {'Copyright ©'}
-      <Link color="inherit" href="https://github.com/christopherfulldev/">
+      <Link color="#80d8ff" href="https://github.com/christopherfulldev/">
         ChambraBook
       </Link>{' '}
       {new Date().getFullYear()}
@@ -42,7 +42,6 @@ const LoginComponent = (props) => {
 
     const handleSubmit = async (event) => {
         event.preventDefault();
-        console.log(password, userName);
         const resultToken = await Login.loginAuth({
             userName,
             password
@@ -107,12 +106,12 @@ const LoginComponent = (props) => {
             </Button>
             <Grid container>
               <Grid item xs>
-                <Link href="#" variant="body2">
+                <Link href="#" variant="body2" color="#ffeb3b">
                   Forgot password?
                 </Link>
               </Grid>
               <Grid item>
-                <Link href="#" variant="body2">
+                <Link href="/register" variant="body2" color="#ffeb3b">
                   {"Don't have an account? Sign Up"}
                 </Link>
               </Grid>

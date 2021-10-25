@@ -1,4 +1,8 @@
+import ProfilePicUploaderComponent from "../ProfilePicUploader"
+
 import * as React from 'react';
+import {useState} from "react";
+
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -17,7 +21,7 @@ function Copyright(props) {
   return (
     <Typography variant="body2" color="text.secondary" align="center" {...props}>
       {'Copyright © '}
-      <Link color="inherit" href="https://github.com/christopherfulldev/">
+      <Link color="#80d8ff" href="https://github.com/christopherfulldev/">
         Chambrabook
       </Link>{' '}
       {new Date().getFullYear()}
@@ -28,11 +32,17 @@ function Copyright(props) {
 
 const theme = createTheme();
 
-const SignUpComponent = () => {
+const SignUpComponent = (props) => {
+  const [name, setName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [age, setAge] = useState("");
+  const [userName, setUserName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    // eslint-disable-next-line no-console
     console.log({
       email: data.get('email'),
       password: data.get('password'),
@@ -84,6 +94,28 @@ const SignUpComponent = () => {
                 <TextField
                   required
                   fullWidth
+                  name="Age"
+                  label="Age"
+                  type="text"
+                  id="age"
+                  autoComplete="new-age"
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  required
+                  fullWidth
+                  name="Username"
+                  label="Username"
+                  type="text"
+                  id="username"
+                  autoComplete="new-username"
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  required
+                  fullWidth
                   id="email"
                   label="Email Address"
                   name="email"
@@ -102,6 +134,20 @@ const SignUpComponent = () => {
                 />
               </Grid>
               <Grid item xs={12}>
+                <TextField
+                  required
+                  fullWidth
+                  name="confirm password"
+                  label="Confirm Password"
+                  type="password"
+                  id="password"
+                  autoComplete="new-password"
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <ProfilePicUploaderComponent />
+              </Grid>
+              <Grid item xs={12}>
                 <FormControlLabel
                   control={<Checkbox value="allowExtraEmails" color="primary" />}
                   label="I want to receive inspiration, marketing promotions and updates via email."
@@ -118,7 +164,7 @@ const SignUpComponent = () => {
             </Button>
             <Grid container justifyContent="flex-end">
               <Grid item>
-                <Link href="#" variant="body2">
+                <Link href="/" variant="body2" color="#ffeb3b">
                   Already have an account? Sign in
                 </Link>
               </Grid>

@@ -11,7 +11,7 @@ const useToken = () => {
     const [token, setToken] = useState(getToken());
 
     const savedToken = (userToken) => {
-        localStorage.setItem("token", JSON.stringify("Bearer " + userToken.token ));
+        localStorage.setItem("token", JSON.stringify(` Bearer ${userToken.token} `));
         localStorage.setItem("payload", JSON.stringify(userToken.payload));
         setToken(userToken);
       };

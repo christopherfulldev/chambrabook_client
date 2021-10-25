@@ -3,23 +3,23 @@ import "./index.css";
 import {Nav} from "react-bootstrap";
 
 
-const NavbarComponent = () => {
+const NavbarComponent = (props) => {
 
     return(
         <nav>
-            <h3 className="title"><img/>Chambrabook</h3>
+            <h3 className="title"><img/> Welcome To Chambrabook</h3>
             <Nav fill variant="tabs" defaultActiveKey="/home" className="nav-bar">
             <Nav.Item>
             <Nav.Link href="/">Inicio</Nav.Link>
+            </Nav.Item> 
+            <Nav.Item>
+            <Nav.Link href="/friends" eventKey="Firends#">Friends</Nav.Link>
             </Nav.Item>
             <Nav.Item>
-            <Nav.Link eventKey="Firends#">Friends</Nav.Link>
+            <Nav.Link href="/albuns" eventKey="Albuns#">Albuns</Nav.Link>
             </Nav.Item>
             <Nav.Item>
-            <Nav.Link eventKey="Albuns#">Albuns</Nav.Link>
-            </Nav.Item>
-            <Nav.Item>
-            <Nav.Link eventKey="Matches#">Matches</Nav.Link>
+            <Nav.Link href="Matches" eventKey="Matches#">Matches</Nav.Link>
             </Nav.Item>
             </Nav>
         </nav>       

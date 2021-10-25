@@ -37,7 +37,7 @@ const FooterComponent = () => {
       >
         <Container maxWidth="sm">
           <Typography variant="body1">
-            Create in Ironhack FullStack Web Development Course
+            Created in Ironhack FullStack Web Development Course
           </Typography>
           <Copyright />
         </Container>
