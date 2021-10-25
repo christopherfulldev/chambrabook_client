@@ -8,7 +8,7 @@
 
 <img src="./public/Screenshot from 2021-10-25 19-15-21.png" alt="">
 
-> Interface criada usando "JS, CSS, HTML, REACT" durante projeto de conculsão "FullStack Web Development Course".
+> Interface criada usando "JS, CSS, HTML, REACT, WebSocket" durante projeto de conculsão "FullStack Web Development Course".
 Adicione amigos, poste fotos, bata papo. 
 
 ### Ajustes e melhorias
