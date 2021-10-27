@@ -1,26 +1,26 @@
 import "./index.css";
 
 import OnLineModeComponent from "../OnLineMode";
+
 import {AuthContext} from "../../Context/Auth.Context";
 import {Users} from "../../dummyData";
+import APIconnection from "../../Services/APIconect";
 
 import { useState, useEffect, useContext} from "react";
 import {Link} from "react-router-dom";
 
-import {Add, Remove} from "@material-ui/icons";
+import {Add, Remove} from "@mui/icons-material";
 
 const RightSideBarComponent = () => {
-    const PUBLIC_FILES = process.env.REACT_APP_PUBLIC_FOLDER;
     const [friends, setFriends] = useState([]);
-    const {user: currentUser, dispatch} = useContext(AuthContext);
-    const [followed, setFollowed] = useState(
-        currentUser.followings.includes(user?.id)
-    );
+    const [user, setUser] = useContext(AuthContext);
+    const [followed, setFollowed] = useState([]);
 
-    useEffect( async () => {
+    useEffect(() => {
         try {
-            await APIconnection.getFriends();
-            return setFriends(friendList.data);
+            const data = async () => {await APIconnection.getFriends()};
+            // const friendList = data.friendList;
+            // return setFriends(friendList.data);
         } catch (error) {
             throw new Error("Error while find friend, try again");
         };
@@ -28,12 +28,12 @@ const RightSideBarComponent = () => {
 
     const handleClick = async () => {
         try {
-            if (followed){
+            if (followed) {
             await APIconnection.unFollowingsUploadData();
-            return dispatch({type: "UNFOLLOW", payload: user._id});
+            return setUser({type: "UNFOLLOW", payload: user._id});
             } else {
                 await APIconnection.followingsUploadData();
-                return dispatch({type: "FOLLOW", payload: user._id});
+                return setUser({type: "FOLLOW", payload: user._id});
             }
             setFollowed(!followed);
         } catch (error) {
@@ -54,7 +54,7 @@ const RightSideBarComponent = () => {
                 <h4 className="rightbarTitle">Online Friends</h4>
                 <ul className="rightbarFriendList">
                 {Users.map((user) => (
-                    <Online key={user.id} user={user} />
+                    <OnLineModeComponent key={user.id} user={user} />
                 ))}
             </ul>
           </>
@@ -64,7 +64,7 @@ const RightSideBarComponent = () => {
     const ProfileRightbar = () => {
         return (
             <>
-                {user.username !== currentUser.username && (
+                {user.username !== user.username && (
                 <button className="rightbarFollowButton" onClick={handleClick}>
                     {followed ? "Unfollow" : "Follow"}
                     {followed ? <Remove /> : <Add />}
@@ -103,9 +103,7 @@ const RightSideBarComponent = () => {
                     <div className="rightbarFollowing">
                         <img
                         src={
-                            friend.profilePicture
-                            ? PUBLIC_FILES + friend.profilePicture
-                            : PUBLIC_FILES + "person/noAvatar.png"
+                            friend.profilePhoto
                         }
                         alt=""
                         className="rightbarFollowingImg"

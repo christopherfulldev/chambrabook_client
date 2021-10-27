@@ -32,7 +32,7 @@ class APIconnection {
     return this.api.get(`/messages/${currentChat?._id}`);
   };
 
-  sendMessages = () => {
+  sendMessages = (message) => {
     return this.api.post("/sendmessage", message);
   }
 
@@ -40,7 +40,7 @@ class APIconnection {
     return this.api.get(`/friends/${currentId}`);
   };
 
-  getConversations = (user) => {
+  getConversations = (user, currentId) => {
     return this.api.get(`/conversation/find/${currentId}/${user._id}`)
   };
 
@@ -53,10 +53,10 @@ class APIconnection {
   };
 
   getTimeLinePost = (userId) => {
-    return this.api.get(`/post/timeline/${post.userId}`);
+    return this.api.get(`/post/timeline/${userId}`);
   };
 
-  uploadUserPost = (userId) => {
+  uploadUserPost = (post, currentUser) => {
     return this.api.put(`/post/like/${post._id}`, {userId: currentUser._id});
   };
 
@@ -64,28 +64,27 @@ class APIconnection {
   return this.api.get(`/friend/${user._id}`)
   };
 
-  unFollowingsUploadData = () => {
+  unFollowingsUploadData = (user, currentUser) => {
     return this.api.put(`/user/${user._id}/unfollow`, {userId: currentUser._id});
   };
 
-  followingsUploadData = () => {
+  followingsUploadData = (user, currentUser) => {
     return this.api.put(`/user/${user._id}/unfollow`, {userId: currentUser._id})
   };
 
-  uploadInsideProfilePic = (file) => {
+  uploadInsideProfilePic = (file, newPost) => {
     const data = new FormData();
-            const fileName = Date.now() + file.name;
-            data.append("name", fileName);
-            data.append("file", file);
-            newPost.image = fileName;
+    const fileName = Date.now() + file.name;
+    data.append("name", fileName);
+    data.append("file", file);
+    newPost.image = fileName;
     return this.api.put('/user/uploadimage', fileName, data);
   }
 
-  postOne = () => {
+  postOne = (newPost) => {
     return this.api.post("/post", newPost);
   }
 
-  
 };
 
 export default new APIconnection();

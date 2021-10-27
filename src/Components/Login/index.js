@@ -48,7 +48,7 @@ const LoginComponent = (props) => {
         });
         setToken(resultToken.data);
     };
-    console.log(token)
+    
   return (
     <>
     {!!token ? <Redirect to="/profile"/> :

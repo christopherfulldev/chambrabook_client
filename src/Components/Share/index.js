@@ -1,10 +1,10 @@
 import "./index.css";
-import APIconect from "../../Services/APIconect";
+import APIconnection from "../../Services/APIconect";
 import {AuthContext} from "../../Context/Auth.Context";
 
-import { useState, useEffect, useContext} from "react";
+import { useState, useEffect, useContext, useRef} from "react";
 
-import {PermMedia, Label, Room, EmojiEmotions, Cancel} from "@material-ui/icons";
+import {PermMedia, Label, Room, EmojiEmotions, Cancel} from "@mui/icons-material";
 
 const ShareComponent = () => {
     const PUBLIC_FILES = process.env.REACT_APP_PUBLIC_FOLDER;
@@ -12,20 +12,25 @@ const ShareComponent = () => {
     const {user} = useContext(AuthContext);
     const refBox = useRef();
 
-    const handleSubmit = async (event) => {
+    const submitHandler = async (event) => {
         event.preventDefault();
         const newPost = {
-            userId: user_id,
+            userId: user._id,
             refBox: refBox.current.value
         };
 
         if (file) {
+            const data = new FormData();
+            const fileName = Date.now() + file.name;
+            data.append("name", fileName);
+            data.append("file", file);
+            newPost.img = fileName;
             try {
                 await APIconnection.uploadInsideProfilePic();
             } catch (error) {
                 throw new Error("Error while update, try again");
             }
-        } else {
+            } else {
             try {
                 await APIconnection.postOne();
                 window.location.reload();
@@ -51,7 +56,7 @@ const ShareComponent = () => {
                 <input
                     placeholder={"What's in your mind " + user.username + "?"}
                     className="shareInput"
-                    ref={desc}
+                    ref={refBox}
                 />
             </div>
                 

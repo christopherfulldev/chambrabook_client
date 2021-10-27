@@ -12,9 +12,9 @@ import {RssFeed,
         WorkOutline,
         Event,
         School,
-        } from "@material-ui/icons";
+        } from "@mui/icons-material";
     
-const LeftSideBar = () => {
+const LeftSideBarComponent = () => {
     return(
         <div className="sidebar">
             <div className="sidebarWrapper">
@@ -68,7 +68,7 @@ const LeftSideBar = () => {
                 <hr className="sidebarHr" />
                 <ul className="sidebarFriendList">
                 {Users.map((user) => (
-                    <CloseFriend key={user.id} user={user} />
+                    <CloseFriendComponent key={user.id} user={user} />
                 ))}
                 </ul>
             </div>
@@ -76,6 +76,6 @@ const LeftSideBar = () => {
     )
 };
 
-export default LeftSideBar;
+export default LeftSideBarComponent;
 
 
