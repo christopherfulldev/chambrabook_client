@@ -1,4 +1,5 @@
 import "./index.css";
+import Logo from "./Screenshot from 2021-10-25 19-31-07.png";
 import {AuthContext} from "../../Context/Auth.Context";
 
 import {Link} from "react-router-dom";
@@ -6,15 +7,18 @@ import { useContext} from "react";
 
 import { Search, Person, Chat, Notifications } from "@mui/icons-material";
 
-const TopBarComponent = () => {
-    const PUBLIC_FILES = process.env.REACT_APP_PUBLIC_FOLDER;
-    const {user} = useContext(AuthContext);
+const TopBarComponent = (props) => {
+    const [user] = useContext(AuthContext);
+    const {payload} = props;
 
     return(
         <div className="topbarContainer">
-            {/* <div className="topbarLeft">
+            <div className="topbarLeft">
                 <Link to="/" style={{ textDecoration: "none" }}>
-                    <span className="logo">ChambraBook</span>
+                    <span className="logo">
+                        <img src={Logo} alt="" className="logo-img"/>
+                        ChambraBook
+                    </span>
                 </Link>
             </div>
             
@@ -50,19 +54,15 @@ const TopBarComponent = () => {
                 <span className="topbarIconBadge">1</span>
             </div>
             </div>
-            
-            <Link to={`/profile/${user.username}`}>
+                                                                                    
+            <Link to={`/profile/${payload.username}`}>
                 <img
-                    src={
-                    user.profilePicture
-                        ? PUBLIC_FILES + user.profilePicture
-                        : PUBLIC_FILES + "person/noAvatar.png"
-                    }
+                    src={payload.profilePhoto}
                     alt=""
                     className="topbarImg"
                 />
             </Link>
-            </div> */}
+            </div>
         </div>
     );
 };

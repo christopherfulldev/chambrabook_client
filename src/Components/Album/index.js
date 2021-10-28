@@ -37,19 +37,12 @@ const AlbumComponent = () => {
   return (
     <ThemeProvider theme={theme} className="body">
       <CssBaseline />
-      <AppBar position="relative">
-        <Toolbar>
-          <CameraIcon sx={{ mr: 2 }} />
-          <Typography variant="h6" color="inherit" noWrap>
-            Album Component
-          </Typography>
-        </Toolbar>
-      </AppBar>
+      
       <main>
         {/* Hero unit */}
         <Box
           sx={{
-            bgcolor: 'background.paper',
+            bgcolor: 'inherit',
             pt: 8,
             pb: 6,
           }}
@@ -61,7 +54,7 @@ const AlbumComponent = () => {
               spacing={2}
               justifyContent="center"
             >
-              <Button variant="contained">Upload Photo</Button>
+              <Button variant="contained">Upload Photos</Button>
             </Stack>
           </Container>
         </Box>

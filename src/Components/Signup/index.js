@@ -1,7 +1,8 @@
-import ProfilePicUploaderComponent from "../ProfilePicUploader"
+import APIconnection from "../../Services/APIconect";
 
 import * as React from 'react';
 import {useState} from "react";
+import {Redirect} from "react-router-dom"
 
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
@@ -39,13 +40,30 @@ const SignUpComponent = (props) => {
   const [userName, setUserName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-
-  const handleSubmit = (event) => {
+  const [userIsCreated, setUserIsCreated] = useState(false);
+  
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    const data = new FormData(event.currentTarget);
+    console.log(lastName)
+    try {
+        await APIconnection.registerCreator({
+        name,
+        lastName,
+        userName,
+        age,
+        email,
+        password
+      }) 
+      setUserIsCreated(true);
+    } catch (error) {
+      throw new Error("Error while create user, try again")
+    }
   };
 
+
   return (
+    <>
+    {userIsCreated ? <Redirect to="/"/> :
     <ThemeProvider theme={theme}>
       <Container component="main" maxWidth="xs">
         <CssBaseline />
@@ -67,6 +85,7 @@ const SignUpComponent = (props) => {
             <Grid container spacing={2}>
               <Grid item xs={12} sm={6}>
                 <TextField
+                  type="text"
                   autoComplete="given-name"
                   name="firstName"
                   required
@@ -74,48 +93,57 @@ const SignUpComponent = (props) => {
                   id="firstName"
                   label="First Name"
                   autoFocus
+                  onChange={event => setName(event.target.value)}
                 />
               </Grid>
               <Grid item xs={12} sm={6}>
                 <TextField
+                  type="text"
                   required
                   fullWidth
                   id="lastName"
                   label="Last Name"
                   name="lastName"
-                  autoComplete="family-name"
+                  autoComplete="given-name"
+                  onChange={event => setLastName(event.target.value)}
                 />
               </Grid>
               <Grid item xs={12}>
                 <TextField
                   required
                   fullWidth
+                  type="text"
                   name="Age"
                   label="Age"
                   type="text"
                   id="age"
                   autoComplete="new-age"
+                  onChange={event => setAge(event.target.value)}
                 />
               </Grid>
               <Grid item xs={12}>
                 <TextField
                   required
                   fullWidth
+                  type="text"
                   name="Username"
                   label="Username"
                   type="text"
                   id="username"
                   autoComplete="new-username"
+                  onChange={event => setUserName(event.target.value)}
                 />
               </Grid>
               <Grid item xs={12}>
                 <TextField
                   required
                   fullWidth
+                  type="email"
                   id="email"
                   label="Email Address"
                   name="email"
                   autoComplete="email"
+                  onChange={event => setEmail(event.target.value)}
                 />
               </Grid>
               <Grid item xs={12}>
@@ -127,26 +155,16 @@ const SignUpComponent = (props) => {
                   type="password"
                   id="password"
                   autoComplete="new-password"
+                  onChange={event => setPassword(event.target.value)}
                 />
               </Grid>
+
               <Grid item xs={12}>
-                <TextField
-                  required
-                  fullWidth
-                  name="confirm password"
-                  label="Confirm Password"
-                  type="password"
-                  id="password"
-                  autoComplete="new-password"
-                />
-              </Grid>
-              <Grid item xs={12}>
-                <ProfilePicUploaderComponent />
               </Grid>
               <Grid item xs={12}>
                 <FormControlLabel
                   control={<Checkbox value="allowExtraEmails" color="primary" />}
-                  label="I want to receive inspiration, marketing promotions and updates via email."
+                  label="I want to receive, marketing promotions and updates via email."
                 />
               </Grid>
             </Grid>
@@ -160,7 +178,7 @@ const SignUpComponent = (props) => {
             </Button>
             <Grid container justifyContent="flex-end">
               <Grid item>
-                <Link href="/" variant="body2" color="#ffeb3b">
+                <Link href="/" variant="body2" color="#ffeb3b" class="sign-in">
                   Already have an account? Sign in
                 </Link>
               </Grid>
@@ -169,7 +187,8 @@ const SignUpComponent = (props) => {
         </Box>
         <Copyright sx={{ mt: 5 }} />
       </Container>
-    </ThemeProvider>
+    </ThemeProvider>}
+    </>
   );
 }
 

@@ -1,7 +1,6 @@
 import "./index.css";
 
 import * as React from 'react';
-import CssBaseline from '@mui/material/CssBaseline';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
@@ -29,15 +28,12 @@ const FooterComponent = () => {
           py: 3,
           px: 2,
           mt: 'auto',
-          backgroundColor: (theme) =>
-            theme.palette.mode === 'light'
-              ? theme.palette.grey[200]
-              : theme.palette.grey[800],
+          backgroundColor: "6A5ACD"
         }}
       >
         <Container maxWidth="sm">
           <Typography variant="body1">
-            Created in Ironhack FullStack Web Development Course
+            Created at Ironhack FullStack Web Development Course
           </Typography>
           <Copyright />
         </Container>

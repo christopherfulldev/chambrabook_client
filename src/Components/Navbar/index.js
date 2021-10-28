@@ -2,13 +2,10 @@ import "./index.css";
 
 import {Nav} from "react-bootstrap";
 
-
 const NavbarComponent = (props) => {
-
     return(
         <nav>
             <h3 className="title">
-            <img src="../../../public/Screenshot from 2021-10-25 19-31-07.png" alt="" className="logo-img"/> 
             Welcome To Chambrabook</h3>
             <Nav fill variant="tabs" defaultActiveKey="/home" className="nav-bar">
             <Nav.Item>

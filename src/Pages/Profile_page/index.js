@@ -1,9 +1,9 @@
 import "./index.css";
 
-import FeedComponent from "../../Components/Feed";
-import RightSideBarComponent from "../../Components/RightSideBar";
+import AlbumComponent from "../../Components/Album"
 import LeftSideBarComponent from "../../Components/LeftSideBar";
 import TopBarComponent from '../../Components/TopBar/index';
+import ProfilePicUploaderComponent from "../../Components/ProfilePicUploader"
 
 import APIconect from "../../Services/APIconect";
 import {AuthContext} from "../../Context/Auth.Context";
@@ -31,7 +31,7 @@ const ProfilePage = (props) => {
 
     return (
         <>
-            <TopBarComponent/>
+            <TopBarComponent payload={payload}/>
             <div className="profile">
             <LeftSideBarComponent/>
             
@@ -48,17 +48,15 @@ const ProfilePage = (props) => {
                         src={payload.profilePhoto}
                         alt=""
                         />
+                        <ProfilePicUploaderComponent />
                     </div>
                     
                     <div className="profileInfo">
-                        <h4 className="profileInfoName">{payload.userName}</h4>
+                        <h4 className="profileInfoName">{payload.name} {payload.lastName}</h4>
+                        <p>{payload.age}</p>
                         <span className="profileInfoDesc">{payload.refBox}</span>
                     </div>
-                </div>
-                
-                <div className="profileRightBottom">
-                <FeedComponent username={payload.userName} />
-                <RightSideBarComponent user={payload} />
+                    <AlbumComponent className="album"/>
                 </div>
             </div>
         </div>  

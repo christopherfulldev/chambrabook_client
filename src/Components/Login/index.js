@@ -1,4 +1,4 @@
-import  Login from "../../Services/APIconect";
+import Login from "../../Services/APIconect";
 import PropTypes from "prop-types";
 import useToken from "../../Hooks/useToken"
 
@@ -106,7 +106,7 @@ const LoginComponent = (props) => {
             </Button>
             <Grid container>
               <Grid item xs>
-                <Link href="#" variant="body2" color="#ffeb3b">
+              <Link href="#" variant="body2" color="#ffeb3b" class="forgot-text">
                   Forgot password?
                 </Link>
               </Grid>

@@ -12,6 +12,16 @@ class APIconnection {
     this.setState({currentChat})
     return currentChat
   };
+
+  registerCreator = ({name, lastName, userName, age, email, password}) => {
+    return this.api.post("/register", {
+      name,
+      lastName,
+      age,
+      userName,
+      email,
+      password})
+}
   
   loginAuth = ({userName, password}) => {
     return this.api.post("/login", {username:userName, password});
