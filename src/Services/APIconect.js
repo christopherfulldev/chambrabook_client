@@ -4,7 +4,8 @@ class APIconnection {
   
   constructor() {
     this.api = axios.create({
-      baseURL: 'https://chambrabookapidb.herokuapp.com/',
+      //baseURL: 'https://chambrabookapidb.herokuapp.com/',
+      baseURL: "http://localhost:3005/"
     });
   };
 
@@ -36,9 +37,26 @@ class APIconnection {
     uploadData.append('file', file);
     uploadData.append("username", username)
     const {data} = await this.api.patch("/user/uploadpicture", uploadData, {headers:{Authorization: token}})
-    console.log(data);
     return data;
   };
+
+  uploadAlbumPic = async (file, username, token) => {
+    const uploadData = new FormData();
+    uploadData.append('file', file);
+    uploadData.append("username", username)
+    const {data} = await this.api.patch("/user/uploadphoto", uploadData, {headers:{Authorization: token}})
+    return data;
+  };
+
+  deleteAlbumPic = async (url, username, token) => {
+    console.log(token)
+    const deleteOneAlbumPic = await this.api.delete(
+      `/user/${username}/deletephoto/photo?urlphoto=${url}`,
+         {headers:{Authorization: token}}
+      ); 
+    const {data} = deleteOneAlbumPic;
+    return data;
+  }
 
   getMessages = (currentChat) => {
     return this.api.get(`/messages/${currentChat?._id}`);

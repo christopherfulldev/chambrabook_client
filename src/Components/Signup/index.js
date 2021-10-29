@@ -44,7 +44,6 @@ const SignUpComponent = (props) => {
   
   const handleSubmit = async (event) => {
     event.preventDefault();
-    console.log(lastName)
     try {
         await APIconnection.registerCreator({
         name,

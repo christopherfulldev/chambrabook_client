@@ -1,9 +1,11 @@
 import "./index.css";
 
-import AlbumComponent from "../../Components/Album"
+import AlbumComponent from "../../Components/Album";
 import LeftSideBarComponent from "../../Components/LeftSideBar";
 import TopBarComponent from '../../Components/TopBar/index';
-import ProfilePicUploaderComponent from "../../Components/ProfilePicUploader"
+import ProfilePicUploaderComponent from "../../Components/ProfilePicUploader";
+
+import {Button} from "react-bootstrap";
 
 import APIconect from "../../Services/APIconect";
 import {AuthContext} from "../../Context/Auth.Context";
@@ -22,19 +24,23 @@ const ProfilePage = (props) => {
         const pickedPayload = await APIconect.getProfilePayload({...payloadData, token});
         setPayload(pickedPayload.data);
         setUser(pickedPayload);
-        console.log(pickedPayload);
     }, []);
+
+    const logout = (event) => {
+        localStorage.removeItem("token");
+        localStorage.removeItem("payload");
+        props.history.push("/");
+    }
 
     if(!token) {
         return <Redirect to="/"/>
     }
-
     return (
         <>
             <TopBarComponent payload={payload}/>
             <div className="profile">
             <LeftSideBarComponent/>
-            
+            {token && <Button onClick={logout}>Log Out</Button>}
             <div className="profileRight">
                 <div className="profileRightTop">
                     <div className="profileCover">
@@ -56,7 +62,7 @@ const ProfilePage = (props) => {
                         <p>{payload.age}</p>
                         <span className="profileInfoDesc">{payload.refBox}</span>
                     </div>
-                    <AlbumComponent className="album"/>
+                    <AlbumComponent className="album" photos={payload.photos} setPayload={setPayload}/>
                 </div>
             </div>
         </div>  

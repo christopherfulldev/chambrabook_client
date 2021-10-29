@@ -1,10 +1,12 @@
 import "./index.css";
 
-import {Nav} from "react-bootstrap";
+import { useEffect, useState } from "react";
 
-const NavbarComponent = (props) => {
+import {Nav, Button} from "react-bootstrap";
+
+const NavbarComponent = () => {
     return(
-        <nav>
+        <nav>                                                                   
             <h3 className="title">
             Welcome To Chambrabook</h3>
             <Nav fill variant="tabs" defaultActiveKey="/home" className="nav-bar">

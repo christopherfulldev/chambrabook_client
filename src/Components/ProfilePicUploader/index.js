@@ -20,11 +20,9 @@ const ProfilePicUploaderComponent = (props) => {
       const receivedToken = localStorage.getItem("token")
       const username = JSON.parse(localStorage.getItem("payload")).username;
       const uploadedProfilePic = await APIconnection.uploadProfilePic(file, username, receivedToken);
-      console.log(uploadedProfilePic);
       setPayload(uploadedProfilePic);
-    }
-  
-    
+    };
+
       return (
         <div>
           <form action="/uploadfile" enctype="multipart/form-data" method="POST" onSubmit={handleSubmit}>

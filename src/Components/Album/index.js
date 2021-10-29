@@ -16,6 +16,12 @@ import Container from '@mui/material/Container';
 import Link from '@mui/material/Link';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 
+import APIconnection from '../../Services/APIconect';
+
+import {useState, useRef} from "react";
+
+
+
 function Copyright() {
   return (
     <Typography variant="body2" color="text.secondary" align="center">
@@ -29,11 +35,41 @@ function Copyright() {
   );
 }
 
-const cards = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+
+
 
 const theme = createTheme();
 
-const AlbumComponent = () => {
+const AlbumComponent = (props) => {
+  const ref = useRef();
+  const {setPayload} = props;
+  const [albumFile, setAlbumFile] = useState(null);
+  const [albumImageUrl, setAlbumImageUrl] = useState("");
+
+  const handleoNChangeAlbum = (event) => {
+    const file = event.target.files[0];
+    const pictureUrl = URL.createObjectURL(file);
+    setAlbumFile(file);
+    setAlbumImageUrl(pictureUrl);
+  };
+
+  const handleSubmitAlbumPhoto = async (event) => {
+    event.preventDefault();
+    const receivedToken = localStorage.getItem("token")
+    const username = JSON.parse(localStorage.getItem("payload")).username;
+    const uploadedProfilePic = await APIconnection.uploadAlbumPic(albumFile, username, receivedToken);
+    setPayload(uploadedProfilePic);
+    ref.current.value = "";
+  };
+
+  const handleDeleteAlbumPhoto = async (event, photo) => {
+    event.preventDefault();
+    const receivedToken = localStorage.getItem("token")
+    const username = JSON.parse(localStorage.getItem("payload")).username;
+    const uploadedProfilePic = await APIconnection.deleteAlbumPic(photo, username, receivedToken);
+    setPayload(uploadedProfilePic);
+  }
+
   return (
     <ThemeProvider theme={theme} className="body">
       <CssBaseline />
@@ -54,14 +90,15 @@ const AlbumComponent = () => {
               spacing={2}
               justifyContent="center"
             >
-              <Button variant="contained">Upload Photos</Button>
+              <Button variant="contained" onClick={handleSubmitAlbumPhoto}>Upload Photos</Button>
+              <input type='file' onChange={handleoNChangeAlbum} ref={ref}/>
             </Stack>
           </Container>
         </Box>
         <Container sx={{ py: 8 }} maxWidth="md">
           {/* End hero unit */}
           <Grid container spacing={4}>
-            {cards.map((card) => (
+            {props.photos && props.photos.map((card) => (
               <Grid item key={card} xs={12} sm={6} md={4}>
                 <Card
                   sx={{ height: '100%', display: 'flex', flexDirection: 'column' }}
@@ -72,7 +109,7 @@ const AlbumComponent = () => {
                       // 16:9
                       pt: '56.25%',
                     }}
-                    image="https://source.unsplash.com/random"
+                    image={card}
                     alt="random"
                   />
                   <CardContent sx={{ flexGrow: 1 }}>
@@ -85,8 +122,7 @@ const AlbumComponent = () => {
                     </Typography>
                   </CardContent>
                   <CardActions>
-                    <Button size="small">View</Button>
-                    <Button size="small">Edit</Button>
+                    <Button size="small" onClick={(event)=> handleDeleteAlbumPhoto(event, card)} >Delete</Button>
                   </CardActions>
                 </Card>
               </Grid>
