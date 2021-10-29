@@ -4,10 +4,34 @@ class APIconnection {
   
   constructor() {
     this.api = axios.create({
-      //baseURL: 'https://chambrabookapidb.herokuapp.com/',
-      baseURL: "http://localhost:3005/"
+      baseURL: 'https://chambrabookapidb.herokuapp.com/',
     });
+
+    this.api.interceptors.request.use(
+      (config) => {
+        const token = localStorage.getItem('token');
+        if (token) {
+          config.headers = {
+            Authorization: `Bearer ${token}`,
+          }
+        }
+        return config
+      },
+      (error) => console.log(error)
+    )
+
+    this.api.interceptors.response.use(
+      (response) => response,
+      ((error) => {
+        if (error.response.status === 400) {
+          localStorage.removeItem('token')
+        }
+        throw error
+      })
+    )
   };
+
+  
 
   currentChatData = ({currentChat}) => {
     this.setState({currentChat})
@@ -52,7 +76,7 @@ class APIconnection {
     console.log(token)
     const deleteOneAlbumPic = await this.api.delete(
       `/user/${username}/deletephoto/photo?urlphoto=${url}`,
-         {headers:{Authorization: token}}
+        {headers:{Authorization: token}}
       ); 
     const {data} = deleteOneAlbumPic;
     return data;
