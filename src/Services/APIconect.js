@@ -12,7 +12,7 @@ class APIconnection {
         const token = localStorage.getItem('token');
         if (token) {
           config.headers = {
-            Authorization: `Bearer ${token}`,
+            Authorization: "Bearer".concat(token),
           }
         }
         return config
