@@ -31,10 +31,12 @@ class APIconnection {
     return this.api.get(`/user/finder/${username}`, {headers:{Authorization: token}})
   };
 
-  uploadProfilePic = (file) => {
+  uploadProfilePic = async (file, username, token) => {
     const uploadData = new FormData();
-    uploadData.append('image', file);
-    const { data } = this.api.put('/user/uploadimage', uploadData)
+    uploadData.append('file', file);
+    uploadData.append("username", username)
+    const {data} = await this.api.patch("/user/uploadpicture", uploadData, {headers:{Authorization: token}})
+    console.log(data);
     return data;
   };
 

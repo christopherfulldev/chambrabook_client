@@ -13,7 +13,7 @@ import { useEffect, useState, useContext} from "react";
 
 const ProfilePage = (props) => {
     const [user, setUser] = useContext(AuthContext);
-    const [payload, setPayload] = useState([]);
+    const [payload, setPayload] = useState({});
     const {useToken} = props;
     const {token} = useToken();
 
@@ -48,7 +48,7 @@ const ProfilePage = (props) => {
                         src={payload.profilePhoto}
                         alt=""
                         />
-                        <ProfilePicUploaderComponent />
+                        <ProfilePicUploaderComponent setPayload={setPayload}/>
                     </div>
                     
                     <div className="profileInfo">

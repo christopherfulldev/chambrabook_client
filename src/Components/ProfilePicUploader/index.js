@@ -1,37 +1,42 @@
 import APIconnection from "../../Services/APIconect";
 
 import { useState } from "react";
-import {Container, Row, Col, Image} from "react-bootstrap";
+import {Container, Row, Col, Image, Button} from "react-bootstrap";
 
-const ProfilePicUploaderComponent = () => {
-
-    const [file, setFile] = useState()
-    const [imageUrl, setImageUrl] = useState()
+const ProfilePicUploaderComponent = (props) => {
+    const [imageUrl, setImageUrl] = useState("");
+    const [file, setFile] = useState(null);
+    const {setPayload} = props;
 
     const handleChange = (event) => {
-      const file = event.target.files[0]
-      const imageUrl = URL.createObjectURL(file);
-      setFile(file)
-      setImageUrl(imageUrl)
+      const file = event.target.files[0];
+      const pictureUrl = URL.createObjectURL(file);
+      setFile(file);
+      setImageUrl(pictureUrl);
     }
 
     const handleSubmit = async (event) => {
-      event.preventDefault()
-        const uploadedProfilePic = await APIconnection.uploadProfilePic(file);
+      event.preventDefault();
+      const receivedToken = localStorage.getItem("token")
+      const username = JSON.parse(localStorage.getItem("payload")).username;
+      const uploadedProfilePic = await APIconnection.uploadProfilePic(file, username, receivedToken);
+      console.log(uploadedProfilePic);
+      setPayload(uploadedProfilePic);
     }
   
     
       return (
         <div>
           <form action="/uploadfile" enctype="multipart/form-data" method="POST" onSubmit={handleSubmit}>
-            <label>Chose Your Profile Picture</label>
+            <label>Upload Photo</label>
             <input type='file' onChange={handleChange} />
-            <Container>
+            <Container className="photo-size">
                 <Row>
                     <Image src={imageUrl} thumbnail width={'280vh'} />
                 </Row>
             </Container>
           </form>
+          <Button onClick={handleSubmit}>Submit</Button>
         </div>
     );
   }
