@@ -1,7 +1,7 @@
 import APIconnection from "../../Services/APIconect";
 
 import { useState, useRef } from "react";
-import {Container, Row, Col, Image, Button} from "react-bootstrap";
+import {Container, Row, DropdownButton, Image, Button, Dropdown} from "react-bootstrap";
 
 const ProfilePicUploaderComponent = (props) => {
     const [imageUrl, setImageUrl] = useState("");
@@ -26,8 +26,8 @@ const ProfilePicUploaderComponent = (props) => {
       setImageUrl("");
     };
 
-      return (
-        <div>
+    return (
+      <DropdownButton id="dropdown-autoclose-true" menuVariant="dark" title="Upload Photo" autoClose="inside">
           <form clasName="input-file" action="/uploadfile" enctype="multipart/form-data" method="POST" onSubmit={handleSubmit}>
             <input clasName="input-file" type='file' onChange={handleChange} placeHolder="Choose File" ref={ref}/>
             <Container className="photo-size">
@@ -37,8 +37,9 @@ const ProfilePicUploaderComponent = (props) => {
             </Container>
           </form>
           <Button onClick={handleSubmit} className="profile-photo-button">Submit</Button>
-        </div>
+      </DropdownButton>
     );
   }
   
   export default ProfilePicUploaderComponent;
+      

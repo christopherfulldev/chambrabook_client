@@ -13,6 +13,10 @@ import { useEffect, useState, useContext} from "react";
 
 const ProfilePage = (props) => {
     const [user, setUser] = useContext(AuthContext);
+    const [name, setName] = useContext(AuthContext);
+    const [lasName, setLastName] = useContext(AuthContext);
+    const [profilePhoto, setProfilePhoto] = useContext(AuthContext);
+    const [Photos] = useContext(AuthContext);
     const [payload, setPayload] = useState({});
     const {useToken} = props;
     const {token} = useToken();
@@ -27,6 +31,7 @@ const ProfilePage = (props) => {
     if(!token) {
         return <Redirect to="/"/>
     }
+
     return (
         <>
             <TopBarComponent {...props } payload={payload} useToken={useToken}/>
@@ -47,13 +52,8 @@ const ProfilePage = (props) => {
                         />
                         <ProfilePicUploaderComponent setPayload={setPayload}/>
                     </div>
-                    
-                    <div className="profileInfo">
-                        <h4 className="profileInfoName">{payload.name} {payload.lastName}</h4>
-                        <p>{payload.age}</p>
-                        <span className="profileInfoDesc">{payload.refBox}</span>
-                    </div>
-                    <AlbumComponent className="album" photos={payload.photos} setPayload={setPayload}/>
+                   
+                    <AlbumComponent className="album" photos={payload.photos} payload={payload} setPayload={setPayload}/>
                 </div>
             </div>
         </div>  
