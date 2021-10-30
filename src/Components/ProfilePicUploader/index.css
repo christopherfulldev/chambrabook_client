@@ -2,3 +2,29 @@
     width: 100vw;
     height: 10vh;
 }
+
+.profile-photo-button {
+    background-color: white;
+    color: black;
+    border: 2px solid #4CAF50;
+    margin: 0vh 0vw 0vh 0vw;
+    width: 7vw;
+    height: 7vh;
+    display: flex;
+    align-self: flex-start;
+    justify-content: center;
+    align-items: center;
+}
+
+.input-file {
+    background-color: white;
+    color: black;
+    border: 2px solid #4CAF50;
+    margin: 0vh 0vw 0vh 0vw;
+    width: 7vw;
+    height: 7vh;
+    display: flex;
+    align-self: flex-start;
+    justify-content: center;
+    align-items: center;
+}

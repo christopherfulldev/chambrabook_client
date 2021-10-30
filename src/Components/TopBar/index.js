@@ -1,5 +1,5 @@
 import "./index.css";
-import Logo from "./Screenshot from 2021-10-25 19-31-07.png";
+import {Button} from "react-bootstrap";
 import {AuthContext} from "../../Context/Auth.Context";
 
 import {Link} from "react-router-dom";
@@ -10,18 +10,17 @@ import { Search, Person, Chat, Notifications } from "@mui/icons-material";
 const TopBarComponent = (props) => {
     const [user] = useContext(AuthContext);
     const {payload} = props;
+    const {useToken} = props;
+    const {token} = useToken();
+
+    const logout = (event) => {
+        localStorage.removeItem("token");
+        localStorage.removeItem("payload");
+        props.history.push("/");
+    }
 
     return(
         <div className="topbarContainer">
-            <div className="topbarLeft">
-                <Link to="/" style={{ textDecoration: "none" }}>
-                    <span className="logo">
-                        <img src={Logo} alt="" className="logo-img"/>
-                        ChambraBook
-                    </span>
-                </Link>
-            </div>
-            
             <div className="topbarCenter">
                 <div className="searchbar">
                 <Search className="searchIcon" />
@@ -62,6 +61,7 @@ const TopBarComponent = (props) => {
                     className="topbarImg"
                 />
             </Link>
+            {token && <Button onClick={logout} className="logout-button">Log Out</Button>}
             </div>
         </div>
     );

@@ -5,8 +5,6 @@ import LeftSideBarComponent from "../../Components/LeftSideBar";
 import TopBarComponent from '../../Components/TopBar/index';
 import ProfilePicUploaderComponent from "../../Components/ProfilePicUploader";
 
-import {Button} from "react-bootstrap";
-
 import APIconect from "../../Services/APIconect";
 import {AuthContext} from "../../Context/Auth.Context";
 
@@ -26,21 +24,14 @@ const ProfilePage = (props) => {
         setUser(pickedPayload);
     }, []);
 
-    const logout = (event) => {
-        localStorage.removeItem("token");
-        localStorage.removeItem("payload");
-        props.history.push("/");
-    }
-
     if(!token) {
         return <Redirect to="/"/>
     }
     return (
         <>
-            <TopBarComponent payload={payload}/>
+            <TopBarComponent {...props } payload={payload} useToken={useToken}/>
             <div className="profile">
             <LeftSideBarComponent/>
-            {token && <Button onClick={logout}>Log Out</Button>}
             <div className="profileRight">
                 <div className="profileRightTop">
                     <div className="profileCover">

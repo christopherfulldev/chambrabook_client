@@ -1,27 +1,28 @@
 .nav-bar {
     display: flex;
     gap: 10vh;
-    border: 1vh solid #2a3cad;
+    border: 1vh solid #576bec;
     border-radius: 1vh;
-    box-shadow: 0px 0px 2vh #2a3cad;
+    box-shadow: 0px 0px 3vh #2a3cad;
     font-size: 3vh;
     justify-content: space-around;
     text-align: center;                                                                                                                                     
-    font-family: 'Roboto';
     font-weight: 700;
     outline: none;
     white-space: nowrap;
 }
 
 .title{
-    font-size: 4vh;
+    font-size: 6vh;
     display: flex;
     justify-content:center;
+    color: #1d0b35;
 }
 
 a:link{
     color: #a7ffeb;
     text-decoration: none;
+    text-shadow: 0vh 0vh 3vh 0vh;
 }
 
 a:visited{
@@ -31,9 +32,19 @@ a:visited{
 a:hover {
     text-decoration: none;
 	color: #472db3;
-	font-size:150%;
+	font-size:3vh;
 }
 
 .logo-img {
     width: 7vh;
 }
+
+.sub-title {
+    font-size: 3vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    margin: -7vh 0vw 0vh 0vw;
+}
+
