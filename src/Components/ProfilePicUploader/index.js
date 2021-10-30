@@ -23,6 +23,7 @@ const ProfilePicUploaderComponent = (props) => {
       const uploadedProfilePic = await APIconnection.uploadProfilePic(file, username, receivedToken);
       setPayload(uploadedProfilePic);
       ref.current.value = ""
+      setImageUrl("");
     };
 
       return (
