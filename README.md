@@ -23,6 +23,7 @@ O projeto ainda está em desenvolvimento e as próximas atualizações serão vo
 ## 💻 Pré-requisitos
 
 Para utilizar nossa API basta acessar "https://chambrabook.herokuapp.com/" e realizar cadastro.
+Nosso DB está disponivel em "https://github.com/christopherfulldev/chambrabook_APIDB".
 
 ## 🚀 Instalando <ChambraBook>
 Nenhuma instalação é necessaria.
