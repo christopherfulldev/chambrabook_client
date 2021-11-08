@@ -12,13 +12,12 @@ const FeedComponent = ({username}) => {
     const [posts, setPosts] = useState([]);
     const [user] = useContext(AuthContext);
 
-    useEffect(()=> {
+    useEffect(() => {
         try {
-            const response = username ? async () => await APIconnection.getAllUserPosts() 
-                : async() => await APIconnection.getTimeLinePost();
-                // setPosts(response.data.sort((output1, output2) => {
-                //     return new Date(output2.createdAt) - new Date (output1.createdAt);
-                // }));
+            const response = username ? async () => await APIconnection.getAllUserPosts(): async () => await APIconnection.getTimeLinePost();
+            // setPosts(response.data.sort((output1, output2) => {
+            //     return new Date(output2.createdAt) - new Date (output1.createdAt);
+            // }));
         } catch (error) {
             throw new Error("Error, while recovery Data, try again")
         };

@@ -9,7 +9,9 @@ import {PermMedia, Label, Room, EmojiEmotions, Cancel} from "@mui/icons-material
 const ShareComponent = () => {
     const PUBLIC_FILES = process.env.REACT_APP_PUBLIC_FOLDER;
     const [file, setFile] = useState(null);
-    const {user} = useContext(AuthContext);
+    const {
+        user
+    } = useContext(AuthContext);
     const refBox = useRef();
 
     const submitHandler = async (event) => {
@@ -30,7 +32,7 @@ const ShareComponent = () => {
             } catch (error) {
                 throw new Error("Error while update, try again");
             }
-            } else {
+        } else {
             try {
                 await APIconnection.postOne();
                 window.location.reload();

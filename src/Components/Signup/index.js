@@ -45,19 +45,19 @@ const SignUpComponent = (props) => {
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-        await APIconnection.registerCreator({
+      await APIconnection.registerCreator({
         name,
         lastName,
         userName,
         age,
         email,
         password
-      }) 
+      })
       setUserIsCreated(true);
     } catch (error) {
       throw new Error("Error while create user, try again")
     }
-  };
+    };
 
 
   return (

@@ -6,7 +6,9 @@ import {Container, Row, DropdownButton, Image, Button, Dropdown} from "react-boo
 const ProfilePicUploaderComponent = (props) => {
     const [imageUrl, setImageUrl] = useState("");
     const [file, setFile] = useState(null);
-    const {setPayload} = props;
+    const {
+      setPayload
+    } = props;
     const ref = useRef();
 
     const handleChange = (event) => {

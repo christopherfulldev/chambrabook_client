@@ -42,7 +42,9 @@ const theme = createTheme();
 
 const AlbumComponent = (props) => {
   const ref = useRef();
-  const {setPayload} = props;
+  const {
+    setPayload
+  } = props;
   const [albumFile, setAlbumFile] = useState(null);
   const [albumImageUrl, setAlbumImageUrl] = useState("");
 

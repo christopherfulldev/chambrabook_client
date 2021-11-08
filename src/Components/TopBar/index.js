@@ -9,9 +9,15 @@ import { Search, Person, Chat, Notifications } from "@mui/icons-material";
 
 const TopBarComponent = (props) => {
     const [user] = useContext(AuthContext);
-    const {payload} = props;
-    const {useToken} = props;
-    const {token} = useToken();
+    const {
+        payload
+    } = props;
+    const {
+        useToken
+    } = props;
+    const {
+        token
+    } = useToken();
 
     const logout = (event) => {
         localStorage.removeItem("token");

@@ -4,7 +4,7 @@ import {
 
 const useToken = () => {
   const getToken = () => {
-    const tokenString = localStorage.getItem("token");                                                                                                                                                                                                                                                                                                  
+    const tokenString = localStorage.getItem("token");
     return tokenString;
   };
 

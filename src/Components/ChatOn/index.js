@@ -9,25 +9,25 @@ const ChatOnComponent = (onlineUsers, curren) => {
     const PUBLIC_FILES = process.env.REACT_APP_PUBLIC_FOLDER;
 
     useEffect(async () => {
-        try {
-          await APIconnection.getFriends();
-          setFriends(response.data);
-        } catch (error) {
-          throw new Error("Error, try again");
-        };
+      try {
+        await APIconnection.getFriends();
+        setFriends(response.data);
+      } catch (error) {
+        throw new Error("Error, try again");
+      };
     }, [currentId]);
 
     useEffect(() => {
-        setOnlineFriends(friends.filter((filter) => onlineUsers.includes(filter._id)));
+      setOnlineFriends(friends.filter((filter) => onlineUsers.includes(filter._id)));
     }, [friends, onlineUsers]);
 
     const handleClick = async (user) => {
-        try {
-            await APIconnection.getConversations()
-            return setCurrentChat(response.data)
-        } catch (error) {
-            throw new Error("Error, try again");
-        }
+      try {
+        await APIconnection.getConversations()
+        return setCurrentChat(response.data)
+      } catch (error) {
+        throw new Error("Error, try again");
+      }
     };
 
     return(

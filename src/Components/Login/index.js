@@ -38,15 +38,18 @@ const theme = createTheme();
 const LoginComponent = (props) => {
     const [userName, setUserName] = useState("");
     const [password, setPassword] = useState("");
-    const {token, setToken} = useToken();
+    const {
+      token,
+      setToken
+    } = useToken();
 
     const handleSubmit = async (event) => {
-        event.preventDefault();
-        const resultToken = await Login.loginAuth({
-            userName,
-            password
-        });
-        setToken(resultToken.data);
+      event.preventDefault();
+      const resultToken = await Login.loginAuth({
+        userName,
+        password
+      });
+      setToken(resultToken.data);
     };
     
   return (

@@ -3,20 +3,20 @@ const AuthReducer = (state, action) => {
         case "LOGIN_START":
             return {
                 user: null,
-                isFetching: true,
-                error: false
+                    isFetching: true,
+                    error: false
             };
         case "LOGIN_SUCCESS":
             return {
                 user: null,
-                isFetching: false,
-                error: false
+                    isFetching: false,
+                    error: false
             };
         case "LOGIN_FAILURE":
             return {
                 user: null,
-                isFetching: false,
-                error: true
+                    isFetching: false,
+                    error: true
             };
         case "FOLLOW":
             return {
@@ -34,9 +34,9 @@ const AuthReducer = (state, action) => {
                     followings: state.user.followings.filter((following) => following !== action.payload)
                 }
             }
-        default:
-            return state;
+            default:
+                return state;
     }
-};
+    };
 
 export default AuthReducer;

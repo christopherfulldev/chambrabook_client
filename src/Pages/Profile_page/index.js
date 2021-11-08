@@ -18,18 +18,25 @@ const ProfilePage = (props) => {
     const [profilePhoto, setProfilePhoto] = useContext(AuthContext);
     const [Photos] = useContext(AuthContext);
     const [payload, setPayload] = useState({});
-    const {useToken} = props;
-    const {token} = useToken();
+    const {
+        useToken
+    } = props;
+    const {
+        token
+    } = useToken();
 
     useEffect(async () => {
         const payloadData = JSON.parse(localStorage.getItem("payload"));
-        const pickedPayload = await APIconect.getProfilePayload({...payloadData, token});
+        const pickedPayload = await APIconect.getProfilePayload({
+            ...payloadData,
+            token
+        });
         setPayload(pickedPayload.data);
         setUser(pickedPayload);
     }, []);
 
-    if(!token) {
-        return <Redirect to="/"/>
+    if (!token) {
+        return <Redirect to = "/" / >
     }
 
     return (

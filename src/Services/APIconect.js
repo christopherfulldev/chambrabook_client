@@ -1,7 +1,6 @@
 import axios from "axios";
 
 class APIconnection {
-  
   constructor() {
     this.api = axios.create({
       baseURL: "https://chambrabookapidb.herokuapp.com/",
@@ -20,36 +19,67 @@ class APIconnection {
     );
   };
 
-  
 
-  currentChatData = ({currentChat}) => {
-    this.setState({currentChat})
+
+  currentChatData = ({
+    currentChat
+  }) => {
+    this.setState({
+      currentChat
+    })
     return currentChat
   };
 
-  registerCreator = ({name, lastName, userName, age, email, password}) => {
+  registerCreator = ({
+    name,
+    lastName,
+    userName,
+    age,
+    email,
+    password
+  }) => {
     return this.api.post("/register", {
       name,
       lastName,
       age,
       userName,
       email,
-      password})
-}
-  
-  loginAuth = ({userName, password}) => {
-    return this.api.post("/login", {username:userName, password});
+      password
+    })
+  }
+
+  loginAuth = ({
+    userName,
+    password
+  }) => {
+    return this.api.post("/login", {
+      username: userName,
+      password
+    });
   };
 
-  getProfilePayload = ({username, token}) => {
-    return this.api.get(`/user/finder/${username}`, {headers:{Authorization: token}})
+  getProfilePayload = ({
+    username,
+    token
+  }) => {
+    return this.api.get(`/user/finder/${username}`, {
+      headers: {
+        Authorization: token
+      }
+    })
   };
 
   uploadProfilePic = async (file, username, token) => {
     const uploadData = new FormData();
     uploadData.append('file', file);
     uploadData.append("username", username)
-    const {data} = await this.api.patch("/user/uploadpicture", uploadData, {headers:{Authorization: token}})
+    const {
+      data
+    } = await this.api.patch("/user/uploadpicture", uploadData, {
+      headers: {
+        Authorization: token
+      }
+    })
     return data;
   };
 
@@ -57,15 +87,23 @@ class APIconnection {
     const uploadData = new FormData();
     uploadData.append('file', file);
     uploadData.append("username", username)
-    const {data} = await this.api.patch("/user/uploadphoto", uploadData, {headers:{Authorization: token}})
+    const {
+      data
+    } = await this.api.patch("/user/uploadphoto", uploadData, {
+      headers: {
+        Authorization: token
+      }
+    })
     return data;
   };
 
   deleteAlbumPic = async (url, username) => {
     const deleteOneAlbumPic = await this.api.delete(
       `/user/${username}/deletephoto/photo?urlphoto=${url}`
-      ); 
-    const {data} = deleteOneAlbumPic;
+    );
+    const {
+      data
+    } = deleteOneAlbumPic;
     return data;
   }
 
@@ -90,7 +128,7 @@ class APIconnection {
   };
 
   getAllUserPosts = (username) => {
-      return this.api.get(`/post/profile/${username}`);
+    return this.api.get(`/post/profile/${username}`);
   };
 
   getTimeLinePost = (userId) => {
@@ -98,19 +136,25 @@ class APIconnection {
   };
 
   uploadUserPost = (post, currentUser) => {
-    return this.api.put(`/post/like/${post._id}`, {userId: currentUser._id});
+    return this.api.put(`/post/like/${post._id}`, {
+      userId: currentUser._id
+    });
   };
 
   getFriends = (user) => {
-  return this.api.get(`/friend/${user._id}`)
+    return this.api.get(`/friend/${user._id}`)
   };
 
   unFollowingsUploadData = (user, currentUser) => {
-    return this.api.put(`/user/${user._id}/unfollow`, {userId: currentUser._id});
+    return this.api.put(`/user/${user._id}/unfollow`, {
+      userId: currentUser._id
+    });
   };
 
   followingsUploadData = (user, currentUser) => {
-    return this.api.put(`/user/${user._id}/unfollow`, {userId: currentUser._id})
+    return this.api.put(`/user/${user._id}/unfollow`, {
+      userId: currentUser._id
+    })
   };
 
   uploadInsideProfilePic = (file, newPost) => {
@@ -126,6 +170,6 @@ class APIconnection {
     return this.api.post("/post", newPost);
   }
 
-};
+  };
 
 export default new APIconnection();

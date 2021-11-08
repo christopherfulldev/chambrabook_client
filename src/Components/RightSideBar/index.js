@@ -18,7 +18,9 @@ const RightSideBarComponent = () => {
 
     useEffect(() => {
         try {
-            const data = async () => {await APIconnection.getFriends()};
+            const data = async () => {
+                await APIconnection.getFriends()
+            };
             // const friendList = data.friendList;
             // return setFriends(friendList.data);
         } catch (error) {
@@ -29,11 +31,17 @@ const RightSideBarComponent = () => {
     const handleClick = async () => {
         try {
             if (followed) {
-            await APIconnection.unFollowingsUploadData();
-            return setUser({type: "UNFOLLOW", payload: user._id});
+                await APIconnection.unFollowingsUploadData();
+                return setUser({
+                    type: "UNFOLLOW",
+                    payload: user._id
+                });
             } else {
                 await APIconnection.followingsUploadData();
-                return setUser({type: "FOLLOW", payload: user._id});
+                return setUser({
+                    type: "FOLLOW",
+                    payload: user._id
+                });
             }
             setFollowed(!followed);
         } catch (error) {

@@ -14,7 +14,9 @@ const PostComponent = ({post}) => {
     const [like, setLike] = useState(post.likes.lenght);
     const [isLiked, setIsLiked] = useState(false);
     const [user, setUser] = useState({})
-    const {user: currentUser} = useContext(AuthContext);
+    const {
+        user: currentUser
+    } = useContext(AuthContext);
 
     useEffect(() => {
         setIsLiked(post.likes.includes(currentUser._id))
@@ -32,7 +34,7 @@ const PostComponent = ({post}) => {
     const likesHandler = async () => {
         try {
             await APIconnection.uploadUserPost()
-            setLike(isLiked ? like -1 : like +1)
+            setLike(isLiked ? like - 1 : like + 1)
             return setIsLiked(!isLiked);
         } catch (error) {
             throw new Error("Error while save post, try again")

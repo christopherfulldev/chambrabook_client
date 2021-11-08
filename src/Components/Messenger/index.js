@@ -21,7 +21,9 @@ const MessengerComponent = (props) => {
     const [arrivalMessage, setArrivalMessage] = useState(null);
     const [onlineUsers, setOnlineUsers] = useState([]);
     const socket = useRef();
-    const { user } = useContext(AuthContext);
+    const {
+        user
+    } = useContext(AuthContext);
     const scrollRef = useRef();
 
     const handleSubmit = async (event) => {
@@ -36,19 +38,20 @@ const MessengerComponent = (props) => {
     const receiverId = currentChat.members.find((member) => member !== user._id);
 
     useEffect(() => {
-        arrivalMessage && currentChat?.members.includes(arrivalMessage.sender)
-        && setMessages((prev) => [...prev, currentChat])
-    }, [arrivalMessage, currentChat] );
+        arrivalMessage && currentChat ? .members.includes(arrivalMessage.sender) &&
+            setMessages((prev) => [...prev, currentChat])
+    }, [arrivalMessage, currentChat]);
 
     useEffect(() => {
         socket.current.emit("addUser", user._id);
         socket.current.on("getUsers", (users) => {
             setOnlineUsers(user.followings.filter((filter) => {
-                users.some((unique) => unique.userId === filter)}));
+                users.some((unique) => unique.userId === filter)
+            }));
         });
     }, [user]);
 
-    useEffect( async ()=> {
+    useEffect(async () => {
         await APIconnection.getMessages();
         setMessages(response.data);
     }, [currentChat]);
@@ -59,7 +62,7 @@ const MessengerComponent = (props) => {
         text: newMessage
     })
 
-    const sendMessageConnection  =  async ()  => {
+    const sendMessageConnection = async () => {
         await APIconnection.sendMessages();
         try {
             setMessages([...messages, response.data]);
@@ -69,8 +72,10 @@ const MessengerComponent = (props) => {
         };
     };
 
-    useEffect(()=> {
-        scrollRef.current?.scrollIntoView({behavior: "smooth"})
+    useEffect(() => {
+        scrollRef.current ? .scrollIntoView({
+            behavior: "smooth"
+        })
     }, [messages]);
 
     return (

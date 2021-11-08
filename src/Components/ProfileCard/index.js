@@ -10,19 +10,26 @@ import {useParams} from "react-router"
 
 const ProfileComponent = () => {
     const [payload, setPayload] = useState([]);
-    const {useToken} = props;
-    const {token} = useToken();
+    const {
+        useToken
+    } = props;
+    const {
+        token
+    } = useToken();
     const [user, setuser] = useState({});
     const username = useParams().username;
 
-    useEffect( async (props) => {
+    useEffect(async (props) => {
         const payloadData = JSON.parse(localStorage.getItem("payload"));
-        const pickedPayload = await APIconect.getProfilePayload({...payloadData, token});
+        const pickedPayload = await APIconect.getProfilePayload({
+            ...payloadData,
+            token
+        });
         setPayload(pickedPayload.data);
     }, [payload]);
 
-    if(!token) {
-        return <Redirect to="/"/>
+    if (!token) {
+        return <Redirect to = "/" / >
     }
 
     return(
