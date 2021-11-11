@@ -5,7 +5,7 @@ const NavbarComponent = () => {
     return(
         <nav>                                                                   
             <h3 className="title">
-            Welcome To Chambrab📖📖ok</h3>
+            Welcome To Chambrab📖📖k</h3>
             <p className="sub-title">"Your social network"</p>
         </nav>       
     )   
